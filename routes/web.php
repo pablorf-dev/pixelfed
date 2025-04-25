@@ -492,4 +492,8 @@ Route::domain(config('pixelfed.domain.app'))->middleware(['validemail', 'twofact
     Route::get('@{username}@{domain}', 'SiteController@legacyWebfingerRedirect');
     Route::get('@{username}', 'SiteController@legacyProfileRedirect');
     Route::get('{username}', 'ProfileController@show');
+
+    Route::get('media/{path}', function($path){
+        return response()->file(storage_path('app/public/' . $path));
+    })->where('path', '.*');;
 });
